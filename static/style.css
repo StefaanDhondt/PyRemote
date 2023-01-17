@@ -1,0 +1,56 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root_box {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+}
+
+#touchpad {
+  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(135deg, lightgray 0, lightgray 1px, white 0, white 50%);
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 5px;
+  flex-grow: 1;
+}
+
+#click_box {
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+}
+
+.mouse_buttons {
+  width: 50%;
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+#hidden_text_field {
+  position: fixed;
+  left: 120%;
+}
+
+#keyboard {
+  height: 70px;
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+#log {
+  background-color: lightblue;
+  height: 70px;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+	<link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename='style.css') }}">
+	<title>PyRemote	</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+
+<body scroll="no">
+	<div id="root_box">
+		<canvas id="touchpad"></canvas>
+		<div id="click_box">
+			<input type="button" value="Left click" class="mouse_buttons" id="left_click">
+			<input type="button" value="Right click" class="mouse_buttons" id="right_click">
+		</div>
+		<input type="password" id="hidden_text_field">
+		<input type="button" value="Keyboard" id="keyboard">
+  	<pre id="log"></pre>
+	</div>
+	<script type=text/javascript src="{{ url_for('static', filename='script.js') }}"></script>
+	
+</body>
+</html>
