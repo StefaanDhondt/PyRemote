@@ -20,16 +20,16 @@ let touchpad = document.getElementById("touchpad");
 touchpad.addEventListener("touchstart", function(e)
 {
   e.preventDefault();
-  first_touch = e.touches.item(0);
-  start_touch = [first_touch.clientX, first_touch.clientY];
+  last_touch = e.touches.item(e.touches.length - 1);
+  start_touch = [last_touch.clientX, last_touch.clientY];
   send({"event": "touchstart", "pos": start_touch});
 });
 
 touchpad.addEventListener("touchmove", function(e)
 {
   e.preventDefault();
-  first_touch = e.touches.item(0);
-  new_touch = [first_touch.clientX, first_touch.clientY];
+  last_touch = e.touches.item(e.touches.length - 1);
+  new_touch = [last_touch.clientX, last_touch.clientY];
   send({"event": "touchmove", "pos": new_touch});
 });
 
@@ -46,36 +46,42 @@ touchpad.addEventListener("touchcancel", function(e)
 let left_click = document.getElementById("left_click");
 left_click.addEventListener("touchstart", function(e) 
 {
-  data = {"event": "left_click_down"};
-  send(data);
+  this.style.backgroundColor = "lightgray";
+  send({"event": "left_click_down"});
 });
 
 left_click.addEventListener("touchend", function(e) 
 {
-  data = {"event": "left_click_up"};
-  send(data);
+  this.style.backgroundColor = "white";
+  send({"event": "left_click_up"});
 });
+
 
 let right_click = document.getElementById("right_click");
 right_click.addEventListener("touchstart", function(e) 
 {
-  data = {"event": "right_click_down"};
-  send(data);
+  this.style.backgroundColor = "lightgray";
+  send({"event": "right_click_down"});
 });
 
 right_click.addEventListener("touchend", function(e) 
 {
-  data = {"event": "right_click_up"};
-  send(data);
+  this.style.backgroundColor = "white";
+  send({"event": "right_click_up"});
 });
 
 let keyboard = document.getElementById("keyboard");
+let keyboard_visible = false;
 let hidden_text_field = document.getElementById("hidden_text_field");
 
 keyboard.addEventListener("click", function(e)
 {
-  hidden_text_field.focus();
-  hidden_text_field.click();
+  if (!keyboard_visible)
+  {
+    hidden_text_field.focus();
+    hidden_text_field.click();
+  }
+  keyboard_visible = !keyboard_visible;
 });
 
 hidden_text_field.addEventListener("input", function(e)

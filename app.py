@@ -44,7 +44,7 @@ def handle_events(sock):
       if anchor_touch_pos:
         curr_touch_pos = req["pos"]
         touch_delta = [curr_touch_pos[0] - anchor_touch_pos[0], curr_touch_pos[1] - anchor_touch_pos[1]]
-        win32api.SetCursorPos((anchor_cursor_pos[0] + touch_delta[0] * 2, anchor_cursor_pos[1] + touch_delta[1] * 2))
+        win32api.SetCursorPos((int(anchor_cursor_pos[0] + touch_delta[0] * 2), int(anchor_cursor_pos[1] + touch_delta[1] * 2)))
         #if scrolling:
         #  if touch_delta[1] > 0:
         #    win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, -120, 0)
@@ -57,11 +57,9 @@ def handle_events(sock):
           win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)  
       anchor_touch_pos = None
       anchor_cursor_pos = None
-      scrolling = False
     elif req["event"] == "touchcancel":
       anchor_touch_pos = None
       anchor_cursor_pos = None
-      scrolling = False
     elif req["event"] == "input":
       if (req["data"]):
         generate_keyboard_events(req["data"])
