@@ -86,13 +86,11 @@ keyboard.addEventListener("click", function(e)
 
 hidden_text_field.addEventListener("input", function(e)
 {
-  log("input event" + e.data);
   data = {"event": "input", "data": e.data};
   send(data);
 });
 
 hidden_text_field.addEventListener("keydown", function(e) {
-  log("keydown event" + e.key);
   data = {"event": "key_down", "key": e.key};
   send(data);
 });

@@ -30,10 +30,22 @@ body {
 .mouse_buttons {
   width: 50%;
   background-color: white;
-  color: black;
-  border: 2px solid #555555;
+  border: 2px solid black;
   border-radius: 8px;
   margin: 5px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: contain; /* Resize the background image to cover the entire container */
+  background-origin: content-box;
+  padding: 5px;
+}
+
+#left_click {
+  background-image: url("LeftClick.svg");
+}
+
+#right_click {
+  background-image: url("RightClick.svg");
 }
 
 #hidden_text_field {
@@ -57,4 +69,5 @@ body {
 #log {
   background-color: lightblue;
   height: 70px;
+  display: none;
 }

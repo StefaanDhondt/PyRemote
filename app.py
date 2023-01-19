@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import win32api
 import win32con
+import win32service
 import json
 from ctypes import windll
 from flask_sock import Sock
@@ -44,6 +45,8 @@ def handle_events(sock):
       if anchor_touch_pos:
         curr_touch_pos = req["pos"]
         touch_delta = [curr_touch_pos[0] - anchor_touch_pos[0], curr_touch_pos[1] - anchor_touch_pos[1]]
+        hdesk = win32service.OpenInputDesktop(0, False, win32con.MAXIMUM_ALLOWED);
+        hdesk.SetThreadDesktop()
         win32api.SetCursorPos((int(anchor_cursor_pos[0] + touch_delta[0] * 2), int(anchor_cursor_pos[1] + touch_delta[1] * 2)))
         #if scrolling:
         #  if touch_delta[1] > 0:
