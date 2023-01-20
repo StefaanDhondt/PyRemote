@@ -20,15 +20,22 @@ let touchpad = document.getElementById("touchpad");
 touchpad.addEventListener("touchstart", function(e)
 {
   e.preventDefault();
-  last_touch = e.touches.item(e.touches.length - 1);
+  last_touch = e.targetTouches.item(e.targetTouches.length - 1);
   start_touch = [last_touch.clientX, last_touch.clientY];
-  send({"event": "touchstart", "pos": start_touch});
+  if (e.targetTouches.length == 1)
+  {
+    send({"event": "touchstart", "pos": start_touch});
+  }
+  else
+  {
+    send({"event": "scrollstart", "pos": start_touch});
+  }
 });
 
 touchpad.addEventListener("touchmove", function(e)
 {
   e.preventDefault();
-  last_touch = e.touches.item(e.touches.length - 1);
+  last_touch = e.targetTouches.item(e.targetTouches.length - 1);
   new_touch = [last_touch.clientX, last_touch.clientY];
   send({"event": "touchmove", "pos": new_touch});
 });

@@ -35,24 +35,32 @@ def home():
 def handle_events(sock):
   anchor_touch_pos = None
   anchor_cursor_pos = None
+  scrolling = False
+  scroll_pos = 0
   while True:
     data = sock.receive()
     req = json.loads(data)
     if req["event"] == "touchstart":
       anchor_touch_pos = req["pos"]
       anchor_cursor_pos = win32api.GetCursorPos()
+    elif req["event"] == "scrollstart":
+      anchor_touch_pos = req["pos"]
+      anchor_cursor_pos = win32api.GetCursorPos()
+      scrolling = True
+      scroll_pos = 0
     elif req["event"] == "touchmove":
       if anchor_touch_pos:
         curr_touch_pos = req["pos"]
         touch_delta = [curr_touch_pos[0] - anchor_touch_pos[0], curr_touch_pos[1] - anchor_touch_pos[1]]
-        hdesk = win32service.OpenInputDesktop(0, False, win32con.MAXIMUM_ALLOWED);
-        hdesk.SetThreadDesktop()
-        win32api.SetCursorPos((int(anchor_cursor_pos[0] + touch_delta[0] * 2), int(anchor_cursor_pos[1] + touch_delta[1] * 2)))
-        #if scrolling:
-        #  if touch_delta[1] > 0:
-        #    win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, -120, 0)
-        #  else:          
-        #    win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, 120, 0)
+        if scrolling:
+          expected_scroll_pos = touch_delta[1] * 2
+          scroll_update = expected_scroll_pos - scroll_pos
+          win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, scroll_update, 0)
+          scroll_pos = expected_scroll_pos
+        else:
+          hdesk = win32service.OpenInputDesktop(0, False, win32con.MAXIMUM_ALLOWED);
+          hdesk.SetThreadDesktop()
+          win32api.SetCursorPos((int(anchor_cursor_pos[0] + touch_delta[0] * 2), int(anchor_cursor_pos[1] + touch_delta[1] * 2)))
     elif req["event"] == "touchend":
       if anchor_cursor_pos:
         if anchor_cursor_pos == win32api.GetCursorPos():
@@ -60,9 +68,11 @@ def handle_events(sock):
           win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)  
       anchor_touch_pos = None
       anchor_cursor_pos = None
+      scrolling = False
     elif req["event"] == "touchcancel":
       anchor_touch_pos = None
       anchor_cursor_pos = None
+      scrolling = False
     elif req["event"] == "input":
       if (req["data"]):
         generate_keyboard_events(req["data"])
