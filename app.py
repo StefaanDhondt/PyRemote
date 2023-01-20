@@ -53,7 +53,7 @@ def handle_events(sock):
         curr_touch_pos = req["pos"]
         touch_delta = [curr_touch_pos[0] - anchor_touch_pos[0], curr_touch_pos[1] - anchor_touch_pos[1]]
         if scrolling:
-          expected_scroll_pos = touch_delta[1] * 2
+          expected_scroll_pos = -touch_delta[1] * 2
           scroll_update = expected_scroll_pos - scroll_pos
           win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, scroll_update, 0)
           scroll_pos = expected_scroll_pos
