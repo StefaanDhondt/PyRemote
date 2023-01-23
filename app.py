@@ -40,6 +40,9 @@ def handle_events(sock):
   while True:
     data = sock.receive()
     req = json.loads(data)
+    hdesk = win32service.OpenInputDesktop(0, False, win32con.MAXIMUM_ALLOWED);
+    hdesk.SetThreadDesktop()
+
     if req["event"] == "touchstart":
       anchor_touch_pos = req["pos"]
       anchor_cursor_pos = win32api.GetCursorPos()
@@ -58,9 +61,13 @@ def handle_events(sock):
           win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, scroll_update, 0)
           scroll_pos = expected_scroll_pos
         else:
-          hdesk = win32service.OpenInputDesktop(0, False, win32con.MAXIMUM_ALLOWED);
-          hdesk.SetThreadDesktop()
-          win32api.SetCursorPos((int(anchor_cursor_pos[0] + touch_delta[0] * 2), int(anchor_cursor_pos[1] + touch_delta[1] * 2)))
+          x = anchor_cursor_pos[0] + touch_delta[0] * 2
+          y = anchor_cursor_pos[1] + touch_delta[1] * 2
+          #win32api.SetCursorPos((x, y))
+          screen_width = win32api.GetSystemMetrics(0)
+          screen_height = win32api.GetSystemMetrics(1)
+          factor = 65535.0
+          win32api.mouse_event(win32con.MOUSEEVENTF_MOVE | win32con.MOUSEEVENTF_ABSOLUTE, int(x * factor / screen_width), int(y * factor / screen_height))
     elif req["event"] == "touchend":
       if anchor_cursor_pos:
         if anchor_cursor_pos == win32api.GetCursorPos():
