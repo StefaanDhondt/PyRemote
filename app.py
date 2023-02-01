@@ -63,16 +63,16 @@ def handle_events(sock):
         else:
           x = anchor_cursor_pos[0] + touch_delta[0] * 2
           y = anchor_cursor_pos[1] + touch_delta[1] * 2
-          #win32api.SetCursorPos((x, y))
           screen_width = win32api.GetSystemMetrics(0)
           screen_height = win32api.GetSystemMetrics(1)
           factor = 65535.0
           win32api.mouse_event(win32con.MOUSEEVENTF_MOVE | win32con.MOUSEEVENTF_ABSOLUTE, int(x * factor / screen_width), int(y * factor / screen_height))
     elif req["event"] == "touchend":
-      if anchor_cursor_pos:
-        if anchor_cursor_pos == win32api.GetCursorPos():
-          win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-          win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)  
+      if not scrolling:
+        if anchor_cursor_pos:
+          if anchor_cursor_pos == win32api.GetCursorPos():
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)  
       anchor_touch_pos = None
       anchor_cursor_pos = None
       scrolling = False

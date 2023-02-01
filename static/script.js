@@ -1,4 +1,5 @@
-function log(msg) {
+function log(msg)
+{
   const container = document.getElementById("log");
   container.textContent = `${msg} \n${container.textContent}`;
 }
@@ -6,13 +7,31 @@ function log(msg) {
 var start_touch = null;
 var new_touch = null;
 var start_cursor = null;
+var socket = null; 
+var queue = []
 
-const socket = new WebSocket('ws://' + location.host + '/events');
-
-function send(input) {
+function send(input) 
+{
   input_as_string = JSON.stringify(input);
-  //log("Sending " + input_as_string);
-  socket.send(input_as_string);
+  if (!socket || socket.readyState !== WebSocket.OPEN) 
+  {
+    queue.push(input_as_string);
+    if (!socket || socket.readyState !== WebSocket.CONNECTING)
+    {
+      socket = new WebSocket('ws://' + location.host + '/events');
+      socket.onopen = function()
+      {
+        while (queue.length > 0) 
+        {
+          socket.send(queue.pop());
+        }
+      }
+    }
+  } 
+  else 
+  {
+    socket.send(input_as_string)
+  }
 }
 
 let touchpad = document.getElementById("touchpad");  
