@@ -35,19 +35,20 @@ function send(input)
 }
 
 let touchpad = document.getElementById("touchpad");  
+let touch_pos_anchor;
 
 touchpad.addEventListener("touchstart", function(e)
 {
   e.preventDefault();
   last_touch = e.targetTouches.item(e.targetTouches.length - 1);
-  start_touch = [last_touch.clientX, last_touch.clientY];
+  touch_pos_anchor = [last_touch.clientX, last_touch.clientY];
   if (e.targetTouches.length == 1)
   {
-    send({"event": "touchstart", "pos": start_touch});
+    send({"event": "mouse_move_begin"});
   }
   else
   {
-    send({"event": "scrollstart", "pos": start_touch});
+    send({"event": "scroll_begin"});
   }
 });
 
@@ -55,18 +56,19 @@ touchpad.addEventListener("touchmove", function(e)
 {
   e.preventDefault();
   last_touch = e.targetTouches.item(e.targetTouches.length - 1);
-  new_touch = [last_touch.clientX, last_touch.clientY];
-  send({"event": "touchmove", "pos": new_touch});
+  touch_pos_delta = [(last_touch.clientX - touch_pos_anchor[0]) * 2, 
+                     (last_touch.clientY - touch_pos_anchor[1]) * 2];
+  send({"event": "mouse_move", "delta": touch_pos_delta});
 });
 
 touchpad.addEventListener("touchend", function(e)
 {
-  send({"event": "touchend"});
+  send({"event": "mouse_move_end"});
 });
 
 touchpad.addEventListener("touchcancel", function(e)
 {
-  send({"event": "touchend"});
+  send({"event": "mouse_move_end"});
 });
 
 let left_click = document.getElementById("left_click");

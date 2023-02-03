@@ -33,7 +33,6 @@ def home():
 
 @sock.route('/events')
 def handle_events(sock):
-  anchor_touch_pos = None
   anchor_cursor_pos = None
   scrolling = False
   scroll_pos = 0
@@ -43,41 +42,33 @@ def handle_events(sock):
     hdesk = win32service.OpenInputDesktop(0, False, win32con.MAXIMUM_ALLOWED);
     hdesk.SetThreadDesktop()
 
-    if req["event"] == "touchstart":
-      anchor_touch_pos = req["pos"]
+    if req["event"] == "mouse_move_begin":
       anchor_cursor_pos = win32api.GetCursorPos()
-    elif req["event"] == "scrollstart":
-      anchor_touch_pos = req["pos"]
+    elif req["event"] == "scroll_begin":
       anchor_cursor_pos = win32api.GetCursorPos()
       scrolling = True
       scroll_pos = 0
-    elif req["event"] == "touchmove":
-      if anchor_touch_pos:
-        curr_touch_pos = req["pos"]
-        touch_delta = [curr_touch_pos[0] - anchor_touch_pos[0], curr_touch_pos[1] - anchor_touch_pos[1]]
+    elif req["event"] == "mouse_move":
+      if anchor_cursor_pos:
+        delta = req["delta"]        
         if scrolling:
-          expected_scroll_pos = -touch_delta[1] * 2
+          expected_scroll_pos = -delta[1]
           scroll_update = expected_scroll_pos - scroll_pos
           win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, scroll_update, 0)
           scroll_pos = expected_scroll_pos
         else:
-          x = anchor_cursor_pos[0] + touch_delta[0] * 2
-          y = anchor_cursor_pos[1] + touch_delta[1] * 2
+          x = anchor_cursor_pos[0] + delta[0]
+          y = anchor_cursor_pos[1] + delta[1]
           screen_width = win32api.GetSystemMetrics(0)
           screen_height = win32api.GetSystemMetrics(1)
           factor = 65535.0
           win32api.mouse_event(win32con.MOUSEEVENTF_MOVE | win32con.MOUSEEVENTF_ABSOLUTE, int(x * factor / screen_width), int(y * factor / screen_height))
-    elif req["event"] == "touchend":
+    elif req["event"] == "mouse_move_end":
       if not scrolling:
         if anchor_cursor_pos:
           if anchor_cursor_pos == win32api.GetCursorPos():
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)  
-      anchor_touch_pos = None
-      anchor_cursor_pos = None
-      scrolling = False
-    elif req["event"] == "touchcancel":
-      anchor_touch_pos = None
       anchor_cursor_pos = None
       scrolling = False
     elif req["event"] == "input":
