@@ -1,0 +1,1 @@
+pyinstaller -D --clean --add-data "templates;templates" --add-data "static;static" PyRemote.py

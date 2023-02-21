@@ -98,6 +98,26 @@ right_click.addEventListener("touchend", function(e)
   send({"event": "right_click_up"});
 });
 
+document.getElementById("esc").addEventListener("click", function(e)
+{
+  send({"event": "key_down", "key": "escape"});
+});
+
+document.getElementById("playpause").addEventListener("click", function(e)
+{
+  send({"event": "key_down", "key": "playpause"});
+});
+
+document.getElementById("voldown").addEventListener("click", function(e)
+{
+  send({"event": "key_down", "key": "voldown"});
+});
+
+document.getElementById("volup").addEventListener("click", function(e)
+{
+  send({"event": "key_down", "key": "volup"});
+});
+
 let keyboard = document.getElementById("keyboard");
 let keyboard_visible = false;
 let hidden_text_field = document.getElementById("hidden_text_field");
@@ -114,11 +134,17 @@ keyboard.addEventListener("click", function(e)
 
 hidden_text_field.addEventListener("input", function(e)
 {
-  data = {"event": "input", "data": e.data};
-  send(data);
+  // On Windows Phone/Edge, an input event is emitted when
+  // a key is pressed, as well as a keydown event. So to avoid
+  // processing the key twice, we don't process it here.
+  // We reserve this event for sending a string.
+  if (e.data.length > 1)
+  {
+    send({"event": "input", "data": e.data});
+  }
 });
 
-hidden_text_field.addEventListener("keydown", function(e) {
-  data = {"event": "key_down", "key": e.key};
-  send(data);
+document.addEventListener("keydown", function(e)
+{
+  send({"event": "key_down", "key": e.key});
 });

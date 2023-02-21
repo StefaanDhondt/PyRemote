@@ -10,7 +10,6 @@ def generate_key_up_down_events(key, shift=False):
     if shift:
       win32api.keybd_event(win32con.VK_SHIFT, 0, 0, 0)
     win32api.keybd_event(key, 0, 0, 0)
-    #time.sleep(0.05)
     win32api.keybd_event(key, 0, win32con.KEYEVENTF_KEYUP, 0)
     if shift:
       win32api.keybd_event(win32con.VK_SHIFT, 0, win32con.KEYEVENTF_KEYUP, 0)
@@ -29,7 +28,6 @@ sock = Sock(app)
 @app.route("/", methods=['GET'])
 def home():
   return render_template('index.html', host=request.host)
-
 
 @sock.route('/events')
 def handle_events(sock):
@@ -72,13 +70,28 @@ def handle_events(sock):
       anchor_cursor_pos = None
       scrolling = False
     elif req["event"] == "input":
-      if (req["data"]):
+      if ("data" in req):
         generate_keyboard_events(req["data"])
     elif req["event"] == "key_down":
       if req["key"] == "Backspace":
         generate_key_up_down_events(win32con.VK_BACK)
       elif req["key"] == "Enter":
         generate_key_up_down_events(win32con.VK_RETURN)
+      elif req["key"] == "escape":
+        generate_key_up_down_events(win32con.VK_ESCAPE)
+      elif req["key"] == "playpause":
+        generate_key_up_down_events(win32con.VK_MEDIA_PLAY_PAUSE)
+      elif req["key"] == "voldown":
+        generate_key_up_down_events(win32con.VK_VOLUME_DOWN)
+      elif req["key"] == "volup":
+        generate_key_up_down_events(win32con.VK_VOLUME_UP)
+      elif len(req["key"]) == 1: 
+        # If "key" is a single character, we assume it doesn't have to be 
+        # converted/translated.
+        generate_keyboard_events(req["key"])
+      else:
+        # We don't know this key, so just print it.
+        print(req["key"])
     elif req["event"] == "left_click_down":
       win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     elif req["event"] == "left_click_up":
@@ -87,3 +100,6 @@ def handle_events(sock):
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0)
     elif req["event"] == "right_click_up":
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0)
+      
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", debug=False)  
