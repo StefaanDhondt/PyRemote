@@ -1,1 +1,0 @@
-powershell "Start-Process prun -Args \"flask run --no-debugger --no-reload --with-threads --host=0.0.0.0\" -WindowStyle Hidden"
