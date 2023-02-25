@@ -5,6 +5,7 @@ import win32service
 import json
 from ctypes import windll
 from flask_sock import Sock
+import os
 
 def generate_key_up_down_events(key, shift=False):
     if shift:
@@ -100,6 +101,8 @@ def handle_events(sock):
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0)
     elif req["event"] == "right_click_up":
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0)
+    elif req["event"] == "shutdown":
+      os.system("shutdown /s /t 1")
       
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=False, use_reloader=False, threaded=True)

@@ -84,7 +84,11 @@ body {
 }
 
 #keyboard {
-  background-image: url("keyboard.svg");
+  background-image: url("Keyboard.svg");
+}
+
+#shutdown {
+  background-image: url("ShutDown.svg");
 }
 
 #hidden_text_field {

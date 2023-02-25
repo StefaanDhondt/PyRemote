@@ -132,6 +132,11 @@ keyboard.addEventListener("click", function(e)
   keyboard_visible = !keyboard_visible;
 });
 
+document.getElementById("shutdown").addEventListener("click", function(e)
+{
+  send({"event": "shutdown"});
+});
+
 hidden_text_field.addEventListener("input", function(e)
 {
   // On Windows Phone/Edge, an input event is emitted when
