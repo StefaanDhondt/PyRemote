@@ -24,11 +24,12 @@ def generate_keyboard_events(string):
     generate_key_up_down_events(vk_key, shift)
 
 app = Flask(__name__)
+app.config.from_file("config.json", load=json.load)
 sock = Sock(app)
 
 @app.route("/", methods=['GET'])
 def home():
-  return render_template('index.html', host=request.host)
+  return render_template('index.html', host=app.config["DEVICES"][0]["host"])
 
 @sock.route('/events')
 def handle_events(sock):

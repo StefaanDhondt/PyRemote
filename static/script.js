@@ -18,7 +18,7 @@ function send(input)
     queue.push(input_as_string);
     if (!socket || socket.readyState !== WebSocket.CONNECTING)
     {
-      socket = new WebSocket('ws://' + location.host + '/events');
+      socket = new WebSocket('ws://' + host + '/events');
       socket.onopen = function()
       {
         while (queue.length > 0) 
