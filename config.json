@@ -5,6 +5,14 @@
       "name": "C3PO",
       "host": "10.0.0.3:5000",
       "MAC address": "40-61-86-C1-92-2F"
+    },
+    {
+      "type": "IR",
+      "name": "TV"
+    },
+    {
+      "type": "IR",
+      "name": "Receiver"
     }
   ]
 }

@@ -9,6 +9,19 @@
 
 <body scroll="no">
 	<div id="root_box">
+		<div class="hamburger-menu">
+			<input id="menu__toggle" type="checkbox" />
+			<label class="menu__btn" for="menu__toggle">
+				<span></span>
+			</label>
+	
+			<ul class="menu__box">
+				{% for device in devices %}
+				<li><a class="menu__item" href="#">{{device}}</a></li>
+				{% endfor %}
+				<li><a class="menu__item" href="shutdown">Shutdown</a></li>
+			</ul>
+		</div>
 		<canvas id="touchpad"></canvas>
 		<div id="mouse_box">
 			<input type="button" value="" class="mouse_button" id="left_click">
@@ -29,6 +42,5 @@
 		var host = "{{ host }}"
 	</script>
 	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-	
 </body>
 </html>

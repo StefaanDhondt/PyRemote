@@ -1,11 +1,26 @@
 from flask import Flask, render_template, request
+import json
+from Utils import shutdown
+
+app = Flask(__name__)
+app.config.from_file("config.json", load=json.load)
+#sock = Sock(app)
+
+@app.route("/", methods=['GET'])
+def home():
+  return render_template('index.html', host=app.config["DEVICES"][0]["host"], devices=[d["name"] for d in app.config["DEVICES"]])
+
+@app.route("/shutdown", methods=['GET'])
+def shutdown_route():
+  shutdown()
+  return render_template('shutdown.html')
+
+'''
 import win32api
 import win32con
 import win32service
-import json
 from ctypes import windll
 from flask_sock import Sock
-import os
 
 def generate_key_up_down_events(key, shift=False):
     if shift:
@@ -22,14 +37,6 @@ def generate_keyboard_events(string):
     shift = (res & 0xFF00) >> 8
     vk_key = res & 0xFF
     generate_key_up_down_events(vk_key, shift)
-
-app = Flask(__name__)
-app.config.from_file("config.json", load=json.load)
-sock = Sock(app)
-
-@app.route("/", methods=['GET'])
-def home():
-  return render_template('index.html', host=app.config["DEVICES"][0]["host"])
 
 @sock.route('/events')
 def handle_events(sock):
@@ -103,7 +110,8 @@ def handle_events(sock):
     elif req["event"] == "right_click_up":
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0)
     elif req["event"] == "shutdown":
-      os.system("shutdown /s /t 1")
+      shutdown()
+'''
       
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=False, use_reloader=False, threaded=True)
