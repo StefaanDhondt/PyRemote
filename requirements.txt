@@ -1,4 +1,1 @@
 Flask
-pywin32
-flask-sock
-pyinstaller

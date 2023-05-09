@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+	<link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename='menu.css') }}">
+	<title>PyRemote	</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+
+<body scroll="no">
+	<div id="root_box">
+		<div class="hamburger-menu">
+			<input id="menu__toggle" type="checkbox" />
+			<label class="menu__btn" for="menu__toggle">
+				<span></span>
+			</label>	
+			<ul class="menu__box">
+				{% for device in devices %}
+  				<li><a class="menu__item" href="Device?device_name={{device.name}}">{{device.name}}</a></li>
+				{% endfor %}
+				<li><a class="menu__item" href="shutdown">Shutdown</a></li>
+			</ul>
+			<h1 class="menu_title">{{current_device.name}}</h1>
+		</div>
+    {% if current_device.type == "WindowsPC" %}
+      {% include "WindowsPC.html" %}
+    {% else %}
+      {% include "IR.html" %}
+    {% endif %}
+	</div>
+</body>
+</html>

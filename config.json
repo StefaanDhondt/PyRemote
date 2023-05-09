@@ -1,18 +1,42 @@
 {
-  "DEVICES": [
-    {
-      "type": "Windows PC",
-      "name": "C3PO",
+  "DEVICES": {
+    "Laptop": {
+      "type": "WindowsPC",
+      "host": "10.0.0.6:5000",
+      "MAC address": "58-A0-23-AB-93-DE"
+    },
+    "C3PO": {
+      "type": "WindowsPC",
       "host": "10.0.0.3:5000",
       "MAC address": "40-61-86-C1-92-2F"
     },
-    {
+    "TV": {
       "type": "IR",
-      "name": "TV"
+      "lirc_name": "??",
+      "buttons": [
+        {
+          "name": "Power",
+          "lirc_key_code": "KEY_POWER"
+        }
+      ]
     },
-    {
+    "Receiver": {
       "type": "IR",
-      "name": "Receiver"
+      "lirc_name": "??",
+      "buttons": [
+        {
+          "name": "Power",
+          "lirc_key_code": "KEY_POWER"
+        },
+        {
+          "name": "VolUp",
+          "lirc_key_code": "KEY_VOLUMEUP"
+        },
+        {
+          "name": "VolDown",
+          "lirc_key_code": "KEY_VOLUMEDOWN"
+        }
+      ]
     }
-  ]
+  }
 }

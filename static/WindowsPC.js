@@ -1,18 +1,3 @@
-function log(msg)
-{
-  const container = document.getElementById("log");
-  container.textContent = `${msg} \n${container.textContent}`;
-}
-
-function toggle_menu() {
-  var x = document.getElementById("menu");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
-
 var start_touch = null;
 var new_touch = null;
 var start_cursor = null;

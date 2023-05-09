@@ -1,0 +1,5 @@
+<div id="buttons">
+  {% for button in current_device.buttons %}
+  	<input type="button" value="{{ button.name }}" class="keyboard_button">
+  {% endfor %}
+</div>

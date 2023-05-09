@@ -1,0 +1,21 @@
+
+<canvas id="touchpad"></canvas>
+<div id="mouse_box">
+	<input type="button" value="" class="mouse_button" id="left_click">
+	<input type="button" value="" class="mouse_button" id="right_click">
+</div>
+<div id="keyboard_box">
+	<input type="button" value="Esc" class="keyboard_button" id="esc">
+	<input type="button" value="" class="keyboard_button" id="playpause">
+	<input type="button" value="" class="keyboard_button" id="voldown">
+	<input type="button" value="" class="keyboard_button" id="volup">
+	<input type="button" value="" class="keyboard_button" id="keyboard">
+	<input type="button" value="" class="keyboard_button" id="shutdown">
+</div>
+<input type="password" id="hidden_text_field">
+
+<script type="text/javascript">
+	var host = "{{ current_device.host }}"
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='WindowsPC.js') }}"></script>
+
