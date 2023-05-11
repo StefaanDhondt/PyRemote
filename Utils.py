@@ -8,10 +8,11 @@ def shutdown():
     os.system('sudo shutdown now')
 
 def run_command(command):
+    print("command:", command)
+
     call_value = call(command, stdout=sys.stdout, stderr=sys.stdout)
 
     if call_value != 0:
         print("Command failure.")
-        print("command:", command)
         sys.stdout.flush()
         sys.exit(1)
