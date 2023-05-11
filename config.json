@@ -2,7 +2,7 @@
   "DEVICES": {
     "Laptop": {
       "type": "WindowsPC",
-      "host": "10.0.0.6:5000",
+      "host": "10.0.0.9:5000",
       "MAC address": "58-A0-23-AB-93-DE"
     },
     "C3PO": {
@@ -12,6 +12,7 @@
     },
     "TV": {
       "type": "IR",
+      "host": "10.0.0.9:5000",
       "lirc_name": "??",
       "buttons": [
         {
@@ -22,6 +23,7 @@
     },
     "Receiver": {
       "type": "IR",
+      "host": "10.0.0.9:5000",
       "lirc_name": "??",
       "buttons": [
         {

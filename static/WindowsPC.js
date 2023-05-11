@@ -12,7 +12,7 @@ function send(input)
     queue.push(input_as_string);
     if (!socket || socket.readyState !== WebSocket.CONNECTING)
     {
-      socket = new WebSocket('ws://' + host + '/events');
+      socket = new WebSocket('ws://' + host + '/win_events');
       socket.onopen = function()
       {
         while (queue.length > 0) 
@@ -24,7 +24,7 @@ function send(input)
   } 
   else 
   {
-    socket.send(input_as_string)
+    socket.send(input_as_string);
   }
 }
 

@@ -1,5 +1,11 @@
 <div id="buttons">
   {% for button in current_device.buttons %}
-  	<input type="button" value="{{ button.name }}" class="keyboard_button">
+  	<input type="button" value="{{ button.name }}" class="remote_button" id="{{ button.lirc_key_code }}">
   {% endfor %}
 </div>
+
+<script type="text/javascript">
+  var host = "{{ current_device.host }}";
+	var remote = "{{ current_device.lirc_name }}";
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='IR.js') }}"></script>
