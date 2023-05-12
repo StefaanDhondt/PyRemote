@@ -36,7 +36,7 @@ if True: #os.name == 'posix': # Assumed raspberry pi
 
   @sock.route('/ir_events')
   def ir_events(sock):
-    handle_ir_events(sock)
+    handle_ir_events(sock, app)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", debug=False, use_reloader=False, threaded=True)

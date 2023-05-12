@@ -14,11 +14,14 @@ def send_once(remote, code):
   run_command(command.split(" "))
 
 
-def handle_events(sock):
+def handle_events(sock, app):
   while True:
     data = sock.receive()
     req = json.loads(data)
+    app.logger.warning(req)
     if req["event"] == "button_down":
-      send_start(req["remote"], req["code"])
+      send_once(req["remote"], req["code"])
     #elif req["event"] == "button_up":
     #  send_stop(req["remote"], req["code"])
+    #elif req["event"] == "click":
+    #  app.logger.warning(req["code"])

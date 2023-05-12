@@ -25,18 +25,11 @@ function send(input)
   }
 }
 
-remote_buttons = document.getElementsByClassName("remote_button");
-
-for (var i = 0; i < remote_buttons.length; i++)
+function handle_touch_event(e)
 {
-  remote_button = remote_buttons[i];
-  console.log(remote_button.id);
-  remote_button.addEventListener("touchstart", function(e)
-  {
-    send({ "event": "button_down", "remote": remote, "code": remote_button.id });
-  });
-  remote_button.addEventListener("touchend", function(e)
-  {
-    send({ "event": "button_up", "remote": remote, "code": remote_button.id });
-  });
+  last_touch = e.targetTouches.item(e.targetTouches.length - 1);
+  send({ "event": "button_down", "remote": remote, "code": last_touch.target.id });
 }
+
+buttons = document.getElementById("buttons");
+buttons.addEventListener("touchstart", handle_touch_event);
