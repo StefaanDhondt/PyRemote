@@ -1,21 +1,21 @@
-#menu__toggle {
+#menu_toggle {
   opacity: 0;
 }
-#menu__toggle:checked + .menu__btn > span {
+#menu_toggle:checked + .menu_btn > span {
   transform: rotate(45deg);
   background-color: #717171;
 }
-#menu__toggle:checked + .menu__btn > span::before {
+#menu_toggle:checked + .menu_btn > span::before {
   top: 0;
   transform: rotate(0deg);
   background-color: #717171;
 }
-#menu__toggle:checked + .menu__btn > span::after {
+#menu_toggle:checked + .menu_btn > span::after {
   top: 0;
   transform: rotate(90deg);
   background-color: #717171;
 }
-.menu__btn {
+.menu_btn {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -24,9 +24,9 @@
   cursor: pointer;
   z-index: 1;
 }
-.menu__btn > span,
-.menu__btn > span::before,
-.menu__btn > span::after {
+.menu_btn > span,
+.menu_btn > span::before,
+.menu_btn > span::after {
   display: block;
   position: absolute;
   width: 100%;
@@ -34,16 +34,16 @@
   background-color: #EEEEEE;
   transition-duration: .25s;
 }
-.menu__btn > span::before {
+.menu_btn > span::before {
   content: '';
   top: -8px;
 }
-.menu__btn > span::after {
+.menu_btn > span::after {
   content: '';
   top: 8px;
 }
 
-.menu__box {
+.menu_box {
   display: block;
   position: fixed;
   top: 0;
@@ -57,7 +57,7 @@
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
   transition-duration: .25s;
 }
-.menu__item {
+.menu_item {
   display: block;
   padding: 12px 24px;
   color: #333;
@@ -67,10 +67,10 @@
   text-decoration: none;
   transition-duration: .25s;
 }
-.menu__item:hover {
+.menu_item:hover {
   background-color: #CFD8DC;
 }
-#menu__toggle:checked ~ .menu__box {
+#menu_toggle:checked ~ .menu_box {
   left: 0px !important;
 }
 

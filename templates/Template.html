@@ -2,8 +2,8 @@
 <html>
 	
 <head>
-	<link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='menu.css') }}">
+	<link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<title>PyRemote	</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -12,15 +12,15 @@
 <body scroll="no">
 	<div id="root_box">
 		<div class="hamburger-menu">
-			<input id="menu__toggle" type="checkbox" />
-			<label class="menu__btn" for="menu__toggle">
+			<input id="menu_toggle" type="checkbox" />
+			<label class="menu_btn" for="menu_toggle">
 				<span></span>
 			</label>	
-			<ul class="menu__box">
+			<ul class="menu_box">
 				{% for device in devices %}
-  				<li><a class="menu__item" href="Device?device_name={{device.name}}">{{device.name}}</a></li>
+  				<li><a class="menu_item" href="Device?device_name={{device.name}}">{{device.name}}</a></li>
 				{% endfor %}
-				<li><a class="menu__item" href="shutdown">Shutdown</a></li>
+				<li><a class="menu_item" href="shutdown">Shutdown</a></li>
 			</ul>
 			<h1 class="menu_title">{{current_device.name}}</h1>
 		</div>
