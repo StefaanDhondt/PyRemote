@@ -21,7 +21,5 @@ def handle_events(sock, app):
     app.logger.warning(req)
     if req["event"] == "button_down":
       send_once(req["remote"], req["code"])
-    #elif req["event"] == "button_up":
-    #  send_stop(req["remote"], req["code"])
-    #elif req["event"] == "click":
-    #  app.logger.warning(req["code"])
+    elif req["event"] == "shutdown":
+      os.system("shutdown /s /t 1")

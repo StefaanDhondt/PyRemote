@@ -1,0 +1,10 @@
+<input id="menu_toggle" type="checkbox">
+<label id="menu_btn" for="menu_toggle">
+  <span></span>
+</label>	
+<ul id="menu_box">
+  {% for remote in remotes %}
+    <li><a class="menu_item" href="Remote?remote_index={{loop.index0}}">{{remote.name}}</a></li>
+  {% endfor %}
+  <li><a class="menu_item" id="menu_shutdown">Afsluiten</a></li>
+</ul>

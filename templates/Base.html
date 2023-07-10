@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='menu.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<title>PyRemote</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+
+<body scroll="no">
+	<div class="column">
+		<div class="header">
+			{% include "Menu.html" %}
+			<h1 id="title">{{ remotes[current_remote_index].name }}</h1>
+		</div>
+    {% block content %}{% endblock %}
+	</div>
+</body>
+<script src="{{ url_for('static', filename='Utils.js') }}"></script>
+<script src="{{ url_for('static', filename='Menu.js') }}"></script>
+<script src="{{ url_for('static', filename='MouseControl.js') }}"></script>
+<script src="{{ url_for('static', filename='KeyboardControl.js') }}"></script>
+<script type="text/javascript">
+var devices = JSON.parse('{{devices | tojson}}');
+{% block javascript %}{% endblock %}
+</script>
+</html>

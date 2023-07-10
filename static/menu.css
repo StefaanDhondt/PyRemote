@@ -1,21 +1,21 @@
 #menu_toggle {
   opacity: 0;
 }
-#menu_toggle:checked + .menu_btn > span {
+#menu_toggle:checked + #menu_btn > span {
   transform: rotate(45deg);
   background-color: #717171;
 }
-#menu_toggle:checked + .menu_btn > span::before {
+#menu_toggle:checked + #menu_btn > span::before {
   top: 0;
   transform: rotate(0deg);
   background-color: #717171;
 }
-#menu_toggle:checked + .menu_btn > span::after {
+#menu_toggle:checked + #menu_btn > span::after {
   top: 0;
   transform: rotate(90deg);
   background-color: #717171;
 }
-.menu_btn {
+#menu_btn {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -24,9 +24,9 @@
   cursor: pointer;
   z-index: 1;
 }
-.menu_btn > span,
-.menu_btn > span::before,
-.menu_btn > span::after {
+#menu_btn > span,
+#menu_btn > span::before,
+#menu_btn > span::after {
   display: block;
   position: absolute;
   width: 100%;
@@ -34,16 +34,16 @@
   background-color: #EEEEEE;
   transition-duration: .25s;
 }
-.menu_btn > span::before {
+#menu_btn > span::before {
   content: '';
   top: -8px;
 }
-.menu_btn > span::after {
+#menu_btn > span::after {
   content: '';
   top: 8px;
 }
 
-.menu_box {
+#menu_box {
   display: block;
   position: fixed;
   top: 0;
@@ -70,7 +70,7 @@
 .menu_item:hover {
   background-color: #CFD8DC;
 }
-#menu_toggle:checked ~ .menu_box {
+#menu_toggle:checked ~ #menu_box {
   left: 0px !important;
 }
 

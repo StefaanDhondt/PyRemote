@@ -6,21 +6,20 @@ body {
   background-color: #303030;
 }
 
-#root_box {
+.column {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   height: 100%;
 }
 
-.hamburger-menu {
+.header {
   height: 40px;
-  width: 100%;
   display: flex;
   flex-direction: row;
 }
 
-.menu_title {
+#title {
   text-align: center;
   width: 100%;
   padding: 5px;
@@ -29,81 +28,84 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-#touchpad {
+.row {
+  display: flex;
+  flex-direction: row;
+  /*align-items: stretch;*/
+}
+
+.mouse_control {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.touchpad {
   background-color: #373738;
   border: 2px solid #717171;
   border-radius: 8px;
   margin: 5px;
   flex-grow: 1;
-}
-
-#mouse_box {
-  display: flex;
-  flex-direction: row;
-  height: 70px;
-}
-
-.mouse_button {
-  width: 50%;
-  background-color: #EEEEEE;
-  border: 2px solid #EEEEEE;
-  border-radius: 8px;
-  margin: 5px;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: contain; /* Resize the background image to cover the entire container */
   background-origin: content-box;
-  padding: 5px;
 }
 
-#left_click {
+.button {
+  margin: 5px;
+  padding: 5px;
+  height: 45px;
+  border-radius: 8px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: contain; /* Resize the background image to cover the entire container */
+  background-origin: content-box;
+  background-color: #45A1FF;
+  border: 2px solid #45A1FF;
+  flex-grow: 1;
+}
+
+.left_click {
+  color: transparent;
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
   background-image: url("LeftClick.svg");
 }
 
-#right_click {
+.right_click {
+  color: transparent;
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
   background-image: url("RightClick.svg");
 }
 
-#keyboard_box, #buttons {
-  display: flex;
-  flex-direction: row;
-  height: 70px;
+.esc {
+  font-size: 26px; 
 }
 
-.keyboard_button, .remote_button {
-  /*height: 70px;*/
-  flex: 1 1 0px;
-  background-color: #45A1FF;
-  border: 2px solid #45A1FF;
-  border-radius: 8px;
-  margin: 5px;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  /*background-size: contain; /* Resize the background image to cover the entire container */
-  background-size: 70%;
-}
-
-#esc {
-  font-size: 200%; 
-}
-
-#playpause {
+.playpause {
+  color: transparent;
   background-image: url("PlayPause.svg");
 }
 
-#voldown {
+.voldown {
+  color: transparent;
   background-image: url("VolDown.svg");
 }
 
-#volup {
+.volup {
+  color: transparent;
   background-image: url("VolUp.svg");
 }
 
-#keyboard {
+.keyboard {
+  color: transparent;
   background-image: url("Keyboard.svg");
 }
 
-#shutdown {
+.power {
+  color: transparent;
   background-image: url("ShutDown.svg");
 }
 

@@ -1,39 +1,49 @@
 {
   "DEVICES": {
+    "Laptop": {
+      "type": "WindowsPC",
+      "host": "10.0.0.22:5000/win_events",
+      "MAC address": "58-A0-23-AB-93-DE"
+    },
     "C3PO": {
       "type": "WindowsPC",
-      "host": "10.0.0.3:5000",
+      "host": "10.0.0.3:5000/win_events",
       "MAC address": "40-61-86-C1-92-2F"
     },
-    "TV": {
-      "type": "IR",
-      "host": "10.0.0.3:5000",
-      "lirc_name": "Philips_32PFL5403D_12",
-      "buttons": [
-        {
-          "name": "Power",
-          "lirc_key_code": "KEY_POWER"
-        }
-      ]
-    },
-    "Receiver": {
-      "type": "IR",
-      "host": "10.0.0.3:5000",
-      "lirc_name": "ONKYO_735M",
-      "buttons": [
-        {
-          "name": "Power",
-          "lirc_key_code": "KEY_POWER"
+    "RaspberryPiZero": {
+      "host": "10.0.0.2:5000/ir_events",
+      "remotes": {
+        "TV": {
+          "lirc": "Philips_32PFL5403D_12",
+          "codes": {
+            "Power": "KEY_POWER"
+          }
         },
-        {
-          "name": "VolDown",
-          "lirc_key_code": "KEY_VOLUMEDOWN"
-        },
-        {
-          "name": "VolUp",
-          "lirc_key_code": "KEY_VOLUMEUP"
+        "Receiver": {
+          "lirc": "ONKYO_735M",
+          "codes": {
+            "Power": "KEY_POWER",
+            "VolDown": "KEY_VOLUMEDOWN",
+            "VolUp": "KEY_VOLUMEUp"
+          }
         }
-      ]
+      }
     }
-  }
+  },
+  "REMOTES": [
+    {
+      "name": "TV kijken",
+      "template": "Watch_TV.html"
+    },
+    {
+      "name": "C3PO",
+      "template": "WindowsPC.html",
+      "host": "C3PO"
+    },
+    {
+      "name": "Laptop",
+      "template": "WindowsPC.html",
+      "host": "Laptop"
+    }
+  ]
 }
