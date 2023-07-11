@@ -1,3 +1,4 @@
 .windows_pc {
-  background-image: url("windows.png");
+  background-size: 30%;
+  background-image: url("Windows.svg");
 }

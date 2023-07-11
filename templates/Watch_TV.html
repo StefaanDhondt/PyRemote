@@ -69,6 +69,7 @@ document.getElementById("power").addEventListener("click", function(e)
   }
   if (confirm("Wil je de Raspberry Pi afsluiten?"))
   {
+    window.open("shutdown", "_self");
     rpz_sender.send({"event": "shutdown"});
   }
 });
