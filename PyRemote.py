@@ -29,7 +29,7 @@ if os.name == 'nt':
   def win_events(sock):
      handle_win_events(sock)
 
-if True: #os.name == 'posix': # Assumed raspberry pi
+if os.name == 'posix': # Assumed raspberry pi
   from IRUtils import handle_events as handle_ir_events
 
   @sock.route('/ir_events')

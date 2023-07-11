@@ -1,12 +1,6 @@
 import sys, os
 from subprocess import call
 
-def shutdown():
-  if sys.platform == 'win32':
-    os.system("shutdown /s /t 1")
-  else:
-    os.system('sudo shutdown now')
-
 def run_command(command):
     print("command:", command)
 
