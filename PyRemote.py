@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from flask_sock import Sock
 import json, os
-from Utils import shutdown
 
 app = Flask(__name__)
 app.config.from_file("config.json", load=json.load)
