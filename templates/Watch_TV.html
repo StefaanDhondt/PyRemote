@@ -61,15 +61,15 @@ add_keyboard_event_listeners(keyboard, text_field, c3po);
 
 document.getElementById("power").addEventListener("click", function(e)
 {
-  if (confirm("Ben je zeker?"))
+  send_ir_event(tv["lirc"], tv["codes"]["Power"], rpz_sender);
+  send_ir_event(receiver["lirc"], receiver["codes"]["Power"], rpz_sender);
+  if (confirm("Wil je C3PO afsluiten?"))
   {
     c3po.send({"event": "shutdown"});
-    send_ir_event(tv["lirc"], tv["codes"]["Power"], rpz_sender);
-    send_ir_event(receiver["lirc"], receiver["codes"]["Power"], rpz_sender);
-    if (confirm("Wil je de Raspberry Pi ook afsluiten?"))
-    {
-      rpz_sender.send({"event": "shutdown"});
-    }
+  }
+  if (confirm("Wil je de Raspberry Pi afsluiten?"))
+  {
+    rpz_sender.send({"event": "shutdown"});
   }
 });
 {% endblock %}
