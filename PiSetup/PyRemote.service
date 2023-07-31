@@ -1,0 +1,8 @@
+[Unit]
+Description=PyRemote
+After=multi-user.target
+[Service]
+Type=idle
+ExecStart=/home/Stefaan/PyRemote/run.sh
+[Install]
+WantedBy=multi-user.target
