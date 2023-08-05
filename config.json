@@ -41,13 +41,17 @@
       "host": "C3PO"
     },
     {
+      "name": "TV",
+      "template": "TV.html"
+    },
+    {
+      "name": "Versterker",
+      "template": "Receiver.html"
+    },
+    {
       "name": "Laptop",
       "template": "WindowsPC.html",
       "host": "Laptop"
-    },
-    {
-      "name": "IR",
-      "template": "IR.html"
     }
   ]
 }

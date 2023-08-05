@@ -1,17 +1,12 @@
 {% extends 'Base.html' %}
 
 {% block content %}
-<h2>TV</h2>
-<div class="row">
-  <input type="button" value="Power" class="button power" id="power_tv">
-</div>
-<h2>Receiver</h2>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Receiver.css') }}">
 <div class="row">
   <input type="button" value="VolDown" class="button voldown" id="voldown">
   <input type="button" value="VolUp" class="button volup" id="volup">
-  <input type="button" value="Power" class="button power" id="power_receiver">
+  <input type="button" value="Power" class="button power" id="power">
 </div>
-<input type="password" id="hidden_text_field">
 {% endblock %}
 
 {% block javascript %}
@@ -19,7 +14,6 @@ rpz = devices["RaspberryPiZero"];
 rpz_sender = new Sender(rpz["host"]);
 
 receiver = rpz["remotes"]["Receiver"];
-tv = rpz["remotes"]["TV"];
 
 document.getElementById("voldown").addEventListener("click", function(e)
 {
@@ -31,12 +25,7 @@ document.getElementById("volup").addEventListener("click", function(e)
   send_ir_event(receiver["lirc"], receiver["codes"]["VolUp"], rpz_sender);
 });
 
-document.getElementById("power_tv").addEventListener("click", function(e)
-{
-  send_ir_event(tv["lirc"], tv["codes"]["Power"], rpz_sender);
-});
-
-document.getElementById("power_receiver").addEventListener("click", function(e)
+document.getElementById("power").addEventListener("click", function(e)
 {
   send_ir_event(receiver["lirc"], receiver["codes"]["Power"], rpz_sender);
 });

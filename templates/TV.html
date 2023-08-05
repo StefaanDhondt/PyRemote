@@ -1,0 +1,21 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='TV.css') }}">
+<div class="row">
+  <input type="button" value="Power" class="button power" id="power">
+</div>
+{% endblock %}
+
+{% block javascript %}
+rpz = devices["RaspberryPiZero"];
+rpz_sender = new Sender(rpz["host"]);
+
+tv = rpz["remotes"]["TV"];
+
+document.getElementById("power").addEventListener("click", function(e)
+{
+  send_ir_event(tv["lirc"], tv["codes"]["Power"], rpz_sender);
+});
+
+{% endblock %}
