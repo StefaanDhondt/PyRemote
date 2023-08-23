@@ -68,3 +68,42 @@ sudo shutdown -r now
 #############################
 # Accept all questions except static IP one (should already be set in the router).
 curl -sSL https://install.pi-hole.net | bash
+
+
+#############################
+# Mount stack media (webdav) at startup
+#############################
+sudo apt-get install davfs2 # A window to configure davfs2 will open, confirm with yes that unprivileged users should be able to mount WebDAV resources
+
+sudo usermod -a -G davfs2 Stefaan
+
+mkdir StackMedia
+mkdir .davfs2
+
+sudo cp /etc/davfs2/secrets /home/Stefaan/.davfs2/secrets
+sudo chown Stefaan:Stefaan /home/Stefaan/.davfs2/secrets
+sudo chmod 600 /home/Stefaan/.davfs2/secrets
+
+echo "Add following line to the end of the file:"
+echo "https://julesthegreat.stackstorage.com/remote.php/webdav/ media <webdav token>"
+sudo nano /home/Stefaan/.davfs2/secrets
+
+echo "Add following line to the end of the file:"
+echo "https://julesthegreat.stackstorage.com/remote.php/webdav/ /home/Stefaan/StackMedia davfs user,rw,auto 0 0"
+sudo nano /etc/fstab
+
+# TOREMOVE:
+#sudo mount.davfs https://julesthegreat.stackstorage.com/remote.php/webdav/ ~/StackMedia -o rw,uid=Stefaan
+
+#############################
+# Share mounted folder on the network
+#############################
+sudo apt-get install samba
+
+echo "Scroll down and find the section named Authentication; change the # security = user line to security = user."
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
+sudo nano /etc/samba/smb.conf
+
+sudo pdbedit -a -u Stefaan
+
+sudo service smbd restart
