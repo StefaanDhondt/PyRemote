@@ -20,9 +20,9 @@
           }
         },
         "Receiver": {
-          "lirc": "ONKYO_735M",
+          "lirc": "Pioneer_VSX_420",
           "codes": {
-            "Power": "KEY_POWER",
+            "Power": "KEY_POWER2",
             "VolDown": "KEY_VOLUMEDOWN",
             "VolUp": "KEY_VOLUMEUp"
           }

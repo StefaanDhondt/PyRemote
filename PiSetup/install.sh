@@ -33,7 +33,8 @@ sudo shutdown -r now
 
 cd /etc/lirc/lircd.conf.d/
 sudo wget -O PhilipsTV.conf https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/remotes/philips/32PFL5403D-12.lircd.conf?format=raw
-sudo wget -O OnkyoReceiver.conf https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/remotes/onkyo/RC-735M.lircd.conf?format=raw
+#sudo wget -O OnkyoReceiver.conf https://sourceforge.net/p/lirc-remotes/code/ci/master/tree/remotes/onkyo/RC-735M.lircd.conf?format=raw
+sudo wget -O PioneerReceiver.conf https://raw.githubusercontent.com/MPParsley/lirc/master/pioneer-vsx-420.conf
 
 sudo systemctl stop lircd
 sudo systemctl start lircd
@@ -77,7 +78,7 @@ sudo apt-get install davfs2 # A window to configure davfs2 will open, confirm wi
 
 sudo usermod -a -G davfs2 Stefaan
 
-mkdir StackMedia
+mkdir Media@Stack
 mkdir .davfs2
 
 sudo cp /etc/davfs2/secrets /home/Stefaan/.davfs2/secrets
@@ -89,7 +90,7 @@ echo "https://julesthegreat.stackstorage.com/remote.php/webdav/ media <webdav to
 sudo nano /home/Stefaan/.davfs2/secrets
 
 echo "Add following line to the end of the file:"
-echo "https://julesthegreat.stackstorage.com/remote.php/webdav/ /home/Stefaan/StackMedia davfs user,rw,auto 0 0"
+echo "https://julesthegreat.stackstorage.com/remote.php/webdav/ /home/Stefaan/Media@Stack davfs user,ro,nofail,_netdev,auto 0 0"
 sudo nano /etc/fstab
 
 # TOREMOVE:
@@ -107,3 +108,11 @@ sudo nano /etc/samba/smb.conf
 sudo pdbedit -a -u Stefaan
 
 sudo service smbd restart
+
+#############################
+# rsync
+#############################
+
+nohup rsync -azv Media@Stack/Music/ Music &
+
+cat nohup.out
