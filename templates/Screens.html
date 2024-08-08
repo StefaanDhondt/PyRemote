@@ -1,0 +1,36 @@
+{% extends 'Base.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Screens.css') }}">
+<div class="row">
+  <input type="button" value="VolDown" class="button voldown" id="voldown_channel0">
+  <input type="button" value="VolUp" class="button volup" id="volup_channel0">
+  <input type="button" value="VolDown" class="button voldown" id="voldown_channel1">
+  <input type="button" value="VolUp" class="button volup" id="volup_channel1">
+</div>
+{% endblock %}
+
+{% block javascript %}
+rpz = devices["RaspberryPiZero"];
+rpz_sender = new Sender(rpz["host"]);
+
+document.getElementById("voldown_channel0").addEventListener("click", function(e)
+{
+  rpz_sender.send({ "event": "button_down", "remote": "somfy", "button": "down_0" });
+});
+
+document.getElementById("volup_channel0").addEventListener("click", function(e)
+{
+  rpz_sender.send({ "event": "button_down", "remote": "somfy", "button": "up_0" });
+});
+
+document.getElementById("voldown_channel1").addEventListener("click", function(e)
+{
+  rpz_sender.send({ "event": "button_down", "remote": "somfy", "button": "down_1" });
+});
+
+document.getElementById("volup_channel1").addEventListener("click", function(e)
+{
+  rpz_sender.send({ "event": "button_down", "remote": "somfy", "button": "up_1" });
+});
+{% endblock %}

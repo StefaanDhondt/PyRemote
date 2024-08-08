@@ -52,6 +52,10 @@
       "name": "Laptop",
       "template": "WindowsPC.html",
       "host": "Laptop"
+    },
+    {
+      "name": "Screens",
+      "template": "Screens.html"
     }
   ]
 }

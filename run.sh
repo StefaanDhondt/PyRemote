@@ -4,4 +4,4 @@
 cd "$(dirname "$0")"
 
 # Actually start Flask.
-sudo prun gunicorn -w 1 -b 0.0.0.0:5000 PyRemote:app
+sudo prun gunicorn --timeout 10 -w 1 -b 0.0.0.0:5000 PyRemote:app
