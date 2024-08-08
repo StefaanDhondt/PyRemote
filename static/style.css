@@ -31,7 +31,6 @@ h2 {
   width: 100%;
   padding: 5px;
   margin: 0px;
-
 }
 
 .row {
@@ -86,7 +85,7 @@ h2 {
   background-image: url("RightClick.svg");
 }
 
-.esc {
+.text {
   font-size: 26px; 
 }
 

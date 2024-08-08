@@ -3,11 +3,14 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Screens.css') }}">
 <div class="row">
-  <input type="button" value="VolDown" class="button voldown" id="voldown_channel0">
-  <input type="button" value="VolUp" class="button volup" id="volup_channel0">
-  <input type="button" value="VolDown" class="button voldown" id="voldown_channel1">
-  <input type="button" value="VolUp" class="button volup" id="volup_channel1">
+  <input type="button" value="&#9650;" class="button text" id="volup_channel0">
+  <input type="button" value="&#9650;" class="button text" id="volup_channel1">
 </div>
+<div class="row">
+  <input type="button" value="&#9660;" class="button text" id="voldown_channel0">
+  <input type="button" value="&#9660;" class="button text" id="voldown_channel1">
+</div>
+
 {% endblock %}
 
 {% block javascript %}

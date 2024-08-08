@@ -3,5 +3,5 @@ body {
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: contain; /* Resize the background image to cover the entire container */
   background-origin: content-box;
-  background-image: url("TV.svg");
+  background-image: url("Sunglasses.svg");
 }
