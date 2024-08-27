@@ -31,6 +31,12 @@ class ScreenRemote:
     GPIO.output(button_idx, GPIO.HIGH)
     sleep(delay_press)
 
+    # If up or down was pressed, the channel button is sleeping.
+    if button_idx in [self.buttons["UP"], self.buttons["DOWN"]]:
+      # Set the time of the last press to 0 such that the `switch_to_channel` 
+      # function will conclude that the remote is asleep.
+      ScreenRemote.switch_to_channel.time_last_press = 0.0
+
     print(f"Button {name} pressed.")
 
   def get_current_channel(self):
