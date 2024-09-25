@@ -22,4 +22,8 @@ chmod +x build.sh
 ./rpi433send 7922683 1 off
 
 # output for light Margo:
-# ...
+# Addr 17307830 unit 10 off, period: 244 us. 
+# Addr 17307830 unit 10 on, period: 244 us.
+
+./rpi433send 17307830 10 on
+./rpi433send 17307830 10 off
