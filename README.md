@@ -1,6 +1,6 @@
 # Introduction
 This is a Flask app to run on a Windows PC, to control mouse and keyboard from a browser (Connect to `http://<ip windows machine>:5000`).
-You can use this e.g. to control a Windows PC from Home Assistant by using a webpage card (`https://www.home-assistant.io/dashboards/iframe/`).
+You can use this e.g. to control a Windows PC from Home Assistant by using a webpage card (https://www.home-assistant.io/dashboards/iframe/).
 
 # Development
 ## Getting started
