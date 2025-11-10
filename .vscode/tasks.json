@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "command": "pyinstaller",
+            "args": [
+                "-D",
+                "--clean",
+                "--windowed", // No console window
+                "--add-data", "templates;templates",
+                "--add-data", "static;static",
+                "PyRemote.py"
+            ],
+            "type": "shell",
+            //"group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "PATH": "${workspaceFolder}\\.venv\\Scripts;${env:PATH}"
+                }
+            },
+            "problemMatcher": [
+                "$python"
+            ]
+        },
+    ]
+}

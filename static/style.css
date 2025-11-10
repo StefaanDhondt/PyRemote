@@ -1,0 +1,120 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #303030;
+  color: #EEEEEE;
+  font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+  margin: 5px;
+  padding: 5px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+}
+
+.header {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+#title {
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  margin: 0px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  /*align-items: stretch;*/
+}
+
+.mouse_control {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.touchpad {
+  background-color: #373738;
+  border: 2px solid #717171;
+  border-radius: 8px;
+  margin: 5px;
+  flex-grow: 1;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: contain; /* Resize the background image to cover the entire container */
+  background-origin: content-box;
+}
+
+.button {
+  margin: 5px;
+  padding: 5px;
+  height: 45px;
+  border-radius: 8px;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: contain; /* Resize the background image to cover the entire container */
+  background-origin: content-box;
+  background-color: #45A1FF;
+  border: 2px solid #45A1FF;
+  flex-grow: 1;
+}
+
+.left_click {
+  color: transparent;
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
+  background-image: url("mouse-left-click-outline.svg");
+}
+
+.right_click {
+  color: transparent;
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
+  background-image: url("mouse-right-click-outline.svg");
+}
+
+/*.text {
+  font-size: 26px; 
+}*/
+
+.escape {
+  color: transparent;
+  background-image: url("keyboard-esc.svg");
+}
+
+.playpause {
+  color: transparent;
+  background-image: url("play-pause.svg");
+}
+
+.voldown {
+  color: transparent;
+  background-image: url("volume-minus.svg");
+}
+
+.volup {
+  color: transparent;
+  background-image: url("volume-plus.svg");
+}
+
+.keyboard {
+  color: transparent;
+  background-image: url("keyboard-outline.svg");
+}
+
+#hidden_text_field {
+  position: fixed;
+  left: 120%;
+}

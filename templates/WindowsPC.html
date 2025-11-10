@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<title>PyRemote</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+</head>
+
+<body scroll="no">
+	<div class="column">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='WindowsPC.css') }}">
+    <div class="mouse_control">
+      <div class="touchpad windows_pc" id="touchpad"></div>
+    </div>
+    <div class="row">
+      <input type="button" value="" class="button left_click" id="left_click">
+      <input type="button" value="" class="button right_click" id="right_click">
+    </div>
+    <div class="row">
+      <input type="button" value="Esc" class="button escape" id="esc">
+      <input type="button" value="PlayPause" class="button playpause" id="playpause">
+      <input type="button" value="VolDown" class="button voldown" id="voldown">
+      <input type="button" value="VolUp" class="button volup" id="volup">
+      <input type="button" value="Keyboard" class="button keyboard" id="keyboard">
+    </div>
+    <input type="password" id="hidden_text_field">
+	</div>
+</body>
+<script src="{{ url_for('static', filename='Utils.js') }}"></script>
+<script src="{{ url_for('static', filename='MouseControl.js') }}"></script>
+<script src="{{ url_for('static', filename='KeyboardControl.js') }}"></script>
+<script type="text/javascript">
+host = new Sender("{{ server_ip }}:5000/win_events");
+
+let touchpad = document.getElementById("touchpad");
+let left_button = document.getElementById("left_click");
+let right_button = document.getElementById("right_click");
+
+add_listeners(touchpad, left_button, right_button, host);
+
+document.getElementById("esc").addEventListener("click", function(e)
+{
+  host.send({"event": "key_down", "key": "escape"});
+});
+
+document.getElementById("playpause").addEventListener("click", function(e)
+{
+  host.send({"event": "key_down", "key": "playpause"});
+});
+
+document.getElementById("voldown").addEventListener("click", function(e)
+{
+  host.send({"event": "key_down", "key": "voldown"});
+});
+
+document.getElementById("volup").addEventListener("click", function(e)
+{
+  host.send({"event": "key_down", "key": "volup"});
+});
+
+let keyboard = document.getElementById("keyboard");
+let text_field = document.getElementById("hidden_text_field");
+add_keyboard_event_listeners(keyboard, text_field, host);
+
+</script>
+</html>

@@ -1,0 +1,4 @@
+Flask
+flask-sock
+pywin32
+pyinstaller
