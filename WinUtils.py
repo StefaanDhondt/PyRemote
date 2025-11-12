@@ -2,6 +2,8 @@ import json
 import win32api, win32con, win32service
 from ctypes import windll
 
+PIXEL_TOLERANCE = 2
+
 def generate_key_up_down_events(key, shift=False):
     if shift:
       win32api.keybd_event(win32con.VK_SHIFT, 0, 0, 0)
@@ -39,7 +41,7 @@ def handle_events(sock):
         delta = req["delta"]        
         if scrolling:
           expected_scroll_pos = -delta[1]
-          scroll_update = expected_scroll_pos - scroll_pos
+          scroll_update = int(expected_scroll_pos - scroll_pos)
           win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, 0, 0, scroll_update, 0)
           scroll_pos = expected_scroll_pos
         else:
@@ -52,7 +54,8 @@ def handle_events(sock):
     elif req["event"] == "mouse_move_end":
       if not scrolling:
         if anchor_cursor_pos:
-          if anchor_cursor_pos == win32api.GetCursorPos():
+          cursor_pos = win32api.GetCursorPos()
+          if (abs(anchor_cursor_pos[0] - cursor_pos[0]) + abs(anchor_cursor_pos[1] - cursor_pos[1])) <= PIXEL_TOLERANCE:
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)  
       anchor_cursor_pos = None
