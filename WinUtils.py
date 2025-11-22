@@ -1,4 +1,4 @@
-import json
+import json, os
 import win32api, win32con, win32service
 from ctypes import windll
 
@@ -91,3 +91,5 @@ def handle_events(sock):
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN, 0, 0)
     elif req["event"] == "right_click_up":
       win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP, 0, 0)
+    elif req["event"] == "power":
+      os.system("shutdown /s /t 0")

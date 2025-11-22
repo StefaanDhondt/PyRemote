@@ -23,6 +23,7 @@
       <input type="button" value="VolDown" class="button voldown" id="voldown">
       <input type="button" value="VolUp" class="button volup" id="volup">
       <input type="button" value="Keyboard" class="button keyboard" id="keyboard">
+      <input type="button" value="Power" class="button power" id="power">
     </div>
     <input type="password" id="hidden_text_field">
 	</div>
@@ -62,6 +63,14 @@ document.getElementById("volup").addEventListener("click", function(e)
 let keyboard = document.getElementById("keyboard");
 let text_field = document.getElementById("hidden_text_field");
 add_keyboard_event_listeners(keyboard, text_field, host);
+
+document.getElementById("power").addEventListener("click", function(e)
+{
+  if (confirm("Are you sure?"))
+  {
+    host.send({"event": "power"});
+  }
+});
 
 </script>
 </html>

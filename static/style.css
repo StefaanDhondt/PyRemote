@@ -114,6 +114,11 @@ h2 {
   background-image: url("keyboard-outline.svg");
 }
 
+.power {
+  color: transparent;
+  background-image: url("power.svg");
+}
+
 #hidden_text_field {
   position: fixed;
   left: 120%;
